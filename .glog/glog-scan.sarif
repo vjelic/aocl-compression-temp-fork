@@ -1,0 +1,1474 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-6d7e32ce-5116-46a1-aa11-3317c3264a37",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strlen(str)` function in C++ is used to find the length of a string. The vulnerability arises when the string `str` is not null-terminated, which can lead to buffer overflows, memory corruption, and other unexpected behaviors. This is because `strlen(str)` counts characters until it encounters a null character (`\\0`), and if it doesn't find one, it could continue reading and returning data from memory beyond the intended boundary of the string.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, always ensure that your strings are null-terminated. This can be done by initializing your strings with a null character at the end, or by manually adding a null character at the end of your strings after they have been modified.\n\nAlso, consider using safer alternatives to `strlen(str)`, such as `strnlen(str, max_len)`, which takes a maximum length parameter and will not read beyond this limit, even if it doesn't encounter a null character.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t len = strlen(str);\n```\n\nUse:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t max_len = sizeof(str) / sizeof(str[0]) - 1;\nsize_t len = strnlen(str, max_len);\n```\n\n## Library Dependencies\n\nThe `strlen` and `strnlen` functions are part of the `<cstring>` library in C++.\n\n## References\n\n- [OWASP C++](https://owasp.org/www-pdf-archive/OWASP_SCP_v2.pdf)"
+              },
+              "properties": {
+                "tags": [
+                  "DS140021"
+                ]
+              }
+            },
+            {
+              "id": "glog-53636810-592d-479e-915f-b2560aa99c2d",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strlen(str)` function in C++ is used to find the length of a string. The vulnerability arises when the string `str` is not null-terminated, which can lead to buffer overflows, memory corruption, and other unexpected behaviors. This is because `strlen(str)` counts characters until it encounters a null character (`\\0`), and if it doesn't find one, it could continue reading and returning data from memory beyond the intended boundary of the string.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, always ensure that your strings are null-terminated. This can be done by initializing your strings with a null character at the end, or by manually adding a null character at the end of your strings after they have been modified.\n\nAlso, consider using safer alternatives to `strlen(str)`, such as `strnlen(str, max_len)`, which takes a maximum length parameter and will not read beyond this limit, even if it doesn't encounter a null character.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t len = strlen(str);\n```\n\nUse:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t max_len = sizeof(str) / sizeof(str[0]) - 1;\nsize_t len = strnlen(str, max_len);\n```\n\n## Library Dependencies\n\nThe `strlen` and `strnlen` functions are part of the `<cstring>` library in C++.\n\n## References\n\n- [OWASP C++](https://owasp.org/www-pdf-archive/OWASP_SCP_v2.pdf)"
+              },
+              "properties": {
+                "tags": [
+                  "DS140021"
+                ]
+              }
+            },
+            {
+              "id": "glog-dfd99517-3bd8-4385-817b-f2052e9c3ee1",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nStoring tokens or keys directly in source code is a common security vulnerability in C++ programming. This practice can lead to unauthorized access if the source code is exposed, as attackers can easily extract sensitive information such as API keys, encryption keys, or tokens. This vulnerability is particularly dangerous in open-source projects or when the code is shared across multiple environments or teams.\n\n### General Mitigation Advice\n\n1. **Environment Variables**: Store sensitive information in environment variables instead of hardcoding them in the source code.\n2. **Configuration Files**: Use configuration files that are not included in version control systems to store sensitive data.\n3. **Secrets Management Tools**: Utilize secrets management tools like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault to securely store and access sensitive information.\n4. **Access Control**: Implement strict access control measures to ensure that only authorized personnel can access sensitive information.\n5. **Encryption**: Encrypt sensitive data both at rest and in transit to add an additional layer of security.\n\n### Source Code Fix Recommendation\n\nBelow is a C++ code example demonstrating how to avoid storing tokens or keys directly in the source code by using environment variables.\n\n```cpp\n#include <iostream>\n#include <cstdlib>\n\nint main() {\n    // Retrieve the token from an environment variable\n    const char* token = std::getenv(\"MY_SECRET_TOKEN\");\n    \n    if (token == nullptr) {\n        std::cerr << \"Error: MY_SECRET_TOKEN environment variable is not set.\" << std::endl;\n        return 1;\n    }\n\n    // Use the token securely in your application\n    std::cout << \"Token retrieved successfully.\" << std::endl;\n\n    return 0;\n}\n```\n\n### Library Dependencies\n\nThe above code example does not require any additional library dependencies beyond the C++ Standard Library.\n\n### OWASP Resources\n\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n- [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS173237"
+                ]
+              }
+            },
+            {
+              "id": "glog-fa270dd7-d7b9-44f8-8f22-417245b59518",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strlen(str)` function in C++ is used to find the length of a string. The vulnerability arises when the string `str` is not null-terminated, which can lead to buffer overflows, memory corruption, and other unexpected behaviors. This is because `strlen(str)` counts characters until it encounters a null character (`\\0`), and if it doesn't find one, it could continue reading and returning data from memory beyond the intended boundary of the string.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, always ensure that your strings are null-terminated. This can be done by initializing your strings with a null character at the end, or by manually adding a null character at the end of your strings after they have been modified.\n\nAlso, consider using safer alternatives to `strlen(str)`, such as `strnlen(str, max_len)`, which takes a maximum length parameter and will not read beyond this limit, even if it doesn't encounter a null character.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t len = strlen(str);\n```\n\nUse:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t max_len = sizeof(str) / sizeof(str[0]) - 1;\nsize_t len = strnlen(str, max_len);\n```\n\n## Library Dependencies\n\nThe `strlen` and `strnlen` functions are part of the `<cstring>` library in C++.\n\n## References\n\n- [OWASP C++](https://owasp.org/www-pdf-archive/OWASP_SCP_v2.pdf)"
+              },
+              "properties": {
+                "tags": [
+                  "DS140021"
+                ]
+              }
+            },
+            {
+              "id": "glog-f31b3a6c-0f3b-4801-94fe-bb409bdfc749",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strlen(str)` function in C++ is used to find the length of a string. The vulnerability arises when the string `str` is not null-terminated, which can lead to buffer overflows, memory corruption, and other unexpected behaviors. This is because `strlen(str)` counts characters until it encounters a null character (`\\0`), and if it doesn't find one, it could continue reading and returning data from memory beyond the intended boundary of the string.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, always ensure that your strings are null-terminated. This can be done by initializing your strings with a null character at the end, or by manually adding a null character at the end of your strings after they have been modified.\n\nAlso, consider using safer alternatives to `strlen(str)`, such as `strnlen(str, max_len)`, which takes a maximum length parameter and will not read beyond this limit, even if it doesn't encounter a null character.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t len = strlen(str);\n```\n\nUse:\n\n```cpp\n#include <cstring>\n\nchar str[] = \"Hello, World!\";\nsize_t max_len = sizeof(str) / sizeof(str[0]) - 1;\nsize_t len = strnlen(str, max_len);\n```\n\n## Library Dependencies\n\nThe `strlen` and `strnlen` functions are part of the `<cstring>` library in C++.\n\n## References\n\n- [OWASP C++](https://owasp.org/www-pdf-archive/OWASP_SCP_v2.pdf)"
+              },
+              "properties": {
+                "tags": [
+                  "DS140021"
+                ]
+              }
+            },
+            {
+              "id": "glog-0df4d402-e87d-4474-ad87-bae8ada11ca8",
+              "help": {
+                "text": "",
+                "markdown": "### Detected Issue with C Function: `memcpy`\n\nThe `memcpy` function in C/C++ is used to copy a specified number of bytes from a source memory location to a destination memory location. The vulnerability arises when the size of the data being copied (`sz`) exceeds the size of the destination buffer (`match`). This can lead to buffer overflow, which may result in undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Bounds Checking**: Always ensure that the destination buffer is large enough to hold the data being copied. Use safer alternatives like `memmove` or `strncpy` if applicable, which provide additional safety checks.\n2. **Use Safer Libraries**: Consider using safer libraries or functions that automatically handle buffer sizes, such as `std::copy` in C++.\n3. **Static Analysis Tools**: Utilize static analysis tools to detect potential buffer overflows during development.\n4. **Code Reviews**: Regularly perform code reviews to catch potential vulnerabilities early in the development process.\n\n### Source Code Fix Recommendation\n\nTo fix the specific vulnerability in the code snippet `memcpy(match, c, sz)`, ensure that the size of `match` is checked before performing the copy operation:\n\n```cpp\n#include <cstring> // Required for memcpy\n#include <algorithm> // Required for std::min\n\nvoid safe_memcpy(char* match, const char* c, size_t sz, size_t match_size) {\n    // Ensure that we do not copy more than the size of the destination buffer\n    size_t copy_size = std::min(sz, match_size);\n    memcpy(match, c, copy_size);\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following library dependencies are required:\n\n- `<cstring>`: For the `memcpy` function.\n- `<algorithm>`: For the `std::min` function.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [Common Weakness Enumeration: CWE-120](https://cwe.mitre.org/data/definitions/120.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-1b59b8e9-908f-4639-a581-cf3d2c2a5e6d",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detected Issue with C Function (malloc)\" vulnerability in C++ arises when the `malloc` function is used improperly, leading to potential memory management issues such as memory leaks, buffer overflows, or undefined behavior. This vulnerability typically occurs when the allocated memory is not properly checked, initialized, or freed, which can result in security vulnerabilities or program crashes.\n\n### General Mitigation Advice\n\n1. **Check for NULL**: Always check the return value of `malloc` to ensure that memory allocation was successful.\n2. **Initialize Memory**: Initialize the allocated memory to prevent undefined behavior.\n3. **Free Memory**: Ensure that all allocated memory is properly freed when no longer needed to prevent memory leaks.\n4. **Use Safer Alternatives**: Consider using safer alternatives like `new` in C++ or smart pointers which automatically manage memory.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to properly use `malloc` in C++:\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for malloc and free\n\nint main() {\n    size_t sz = 10;\n    int* ptr = (int*)malloc(sz * sizeof(int));\n\n    // Check if malloc succeeded\n    if (ptr == nullptr) {\n        std::cerr << \"Memory allocation failed\" << std::endl;\n        return 1;\n    }\n\n    // Initialize memory\n    for (size_t i = 0; i < sz; ++i) {\n        ptr[i] = 0;\n    }\n\n    // Use the allocated memory\n    for (size_t i = 0; i < sz; ++i) {\n        std::cout << ptr[i] << \" \";\n    }\n    std::cout << std::endl;\n\n    // Free the allocated memory\n    free(ptr);\n\n    return 0;\n}\n```\n\n### Library Dependencies\n\n- `<iostream>`: For input and output operations.\n- `<cstdlib>`: For `malloc` and `free` functions.\n\n### Relevant Links\n\n- [CWE-401: Improper Release of Memory Before Removing Last Reference ('Memory Leak')](https://cwe.mitre.org/data/definitions/401.html)\n- [CWE-476: NULL Pointer Dereference](https://cwe.mitre.org/data/definitions/476.html)\n\nThese links are verified to be active and accessible for anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS161085"
+                ]
+              }
+            },
+            {
+              "id": "glog-b4cb1445-8143-4b8e-aba0-a87eb1b4c99e",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability associated with the `memcpy` function in C++ arises from improper handling of memory, which can lead to buffer overflows. The function `memcpy(ip, c, sz)` copies `sz` bytes from the source `c` to the destination `ip`. If `sz` exceeds the size of the destination buffer `ip`, it can result in a buffer overflow, potentially leading to data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Bounds Checking**: Always ensure that the destination buffer is large enough to hold the data being copied.\n2. **Use Safer Alternatives**: Consider using safer functions like `memmove` or `std::copy` from the C++ Standard Library, which provide better safety guarantees.\n3. **Static Analysis Tools**: Utilize static analysis tools to detect potential buffer overflows in your code.\n4. **Code Reviews**: Regularly perform code reviews to catch potential vulnerabilities early in the development process.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability, ensure that the size of the destination buffer is checked before performing the copy operation. Here is a fixed version of the code:\n\n```cpp\n#include <cstring>  // Required for memcpy\n#include <algorithm> // Required for std::min\n\nvoid safe_memcpy(char* ip, const char* c, size_t sz, size_t ip_size) {\n    // Ensure that we do not copy more than the destination can hold\n    size_t copy_size = std::min(sz, ip_size);\n    memcpy(ip, c, copy_size);\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following library dependencies are required:\n\n- `<cstring>`: For the `memcpy` function.\n- `<algorithm>`: For the `std::min` function.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-dc49edc2-ab46-46aa-acb4-d01467ab2bf5",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detected Issue with C Function (malloc)\" vulnerability in C++ arises when the `malloc` function is used improperly, leading to potential memory management issues such as memory leaks, buffer overflows, or undefined behavior. This vulnerability typically occurs when the allocated memory is not properly checked, initialized, or freed, which can result in security vulnerabilities or program crashes.\n\n### General Mitigation Advice\n\n1. **Check for NULL**: Always check the return value of `malloc` to ensure that memory allocation was successful.\n2. **Initialize Memory**: Initialize the allocated memory to prevent undefined behavior.\n3. **Free Memory**: Ensure that all allocated memory is properly freed when no longer needed to prevent memory leaks.\n4. **Use Safer Alternatives**: Consider using safer alternatives like `new` in C++ or smart pointers which automatically manage memory.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to properly use `malloc` in C++:\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for malloc and free\n\nint main() {\n    size_t sz = 10;\n    int* ptr = (int*)malloc(sz * sizeof(int));\n\n    // Check if malloc succeeded\n    if (ptr == nullptr) {\n        std::cerr << \"Memory allocation failed\" << std::endl;\n        return 1;\n    }\n\n    // Initialize memory\n    for (size_t i = 0; i < sz; ++i) {\n        ptr[i] = 0;\n    }\n\n    // Use the allocated memory\n    for (size_t i = 0; i < sz; ++i) {\n        std::cout << ptr[i] << \" \";\n    }\n    std::cout << std::endl;\n\n    // Free the allocated memory\n    free(ptr);\n\n    return 0;\n}\n```\n\n### Library Dependencies\n\n- `<iostream>`: For input and output operations.\n- `<cstdlib>`: For `malloc` and `free` functions.\n\n### Relevant Links\n\n- [CWE-401: Improper Release of Memory Before Removing Last Reference ('Memory Leak')](https://cwe.mitre.org/data/definitions/401.html)\n- [CWE-476: NULL Pointer Dereference](https://cwe.mitre.org/data/definitions/476.html)\n\nThese links are verified to be active and accessible for anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS161085"
+                ]
+              }
+            },
+            {
+              "id": "glog-6b40440b-7203-4697-8d3d-ee0e48265042",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detected Issue with C Function (malloc)\" vulnerability in C++ typically arises from improper handling of memory allocation using the `malloc` function. This can lead to various issues such as memory leaks, buffer overflows, or undefined behavior if the allocated memory is not properly managed. The specific vulnerability sink `malloc(100000)` indicates a potential problem with allocating a large block of memory without checking if the allocation was successful, which can lead to a null pointer dereference if the system is unable to allocate the requested memory.\n\n### General Mitigation Advice\n\n1. **Check for Null Pointers**: Always check the return value of `malloc` to ensure that the memory allocation was successful before using the allocated memory.\n2. **Use `new` in C++**: Prefer using `new` and `delete` in C++ for memory management, as they provide better type safety and automatically call constructors and destructors.\n3. **Limit Memory Usage**: Ensure that the program does not request more memory than is necessary or available, and handle cases where memory allocation fails gracefully.\n4. **Free Allocated Memory**: Always free the allocated memory using `free` (or `delete` in C++) to prevent memory leaks.\n\n### Source Code Fix Recommendation\n\nHere is a fixed version of the code that includes proper error checking and uses C++ memory management practices:\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for malloc and free\n\nint main() {\n    // Attempt to allocate memory\n    char* buffer = static_cast<char*>(malloc(100000));\n    \n    // Check if malloc was successful\n    if (buffer == nullptr) {\n        std::cerr << \"Memory allocation failed\" << std::endl;\n        return 1; // Exit with error code\n    }\n\n    // Use the allocated memory\n    // ...\n\n    // Free the allocated memory\n    free(buffer);\n\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code example, the following standard libraries are required:\n\n- `<iostream>`: For input and output operations.\n- `<cstdlib>`: For `malloc` and `free` functions.\n\n### Relevant Resources\n\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n\n### Common Weakness Enumeration\n\n- [CWE-401: Improper Release of Memory Before Removing Last Reference ('Memory Leak')](https://cwe.mitre.org/data/definitions/401.html)\n- [CWE-476: NULL Pointer Dereference](https://cwe.mitre.org/data/definitions/476.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS161085"
+                ]
+              }
+            },
+            {
+              "id": "glog-75fc17e9-740f-4b9d-abe4-060b2206d99f",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detected Issue with C Function (malloc)\" vulnerability in C++ typically arises from improper handling of memory allocation using the `malloc` function. This can lead to various issues such as memory leaks, buffer overflows, or undefined behavior if the allocated memory is not properly managed. The specific vulnerability sink `malloc(100000)` indicates a potential problem with allocating a large block of memory without checking if the allocation was successful, which can lead to a null pointer dereference if the system is unable to allocate the requested memory.\n\n### General Mitigation Advice\n\n1. **Check for Null Pointers**: Always check the return value of `malloc` to ensure that the memory allocation was successful before using the allocated memory.\n2. **Use `new` in C++**: Prefer using `new` and `delete` in C++ for memory management, as they provide better type safety and automatically call constructors and destructors.\n3. **Limit Memory Usage**: Ensure that the program does not request more memory than is necessary or available, and handle cases where memory allocation fails gracefully.\n4. **Free Allocated Memory**: Always free the allocated memory using `free` (or `delete` in C++) to prevent memory leaks.\n\n### Source Code Fix Recommendation\n\nHere is a fixed version of the code that includes proper error checking and uses C++ memory management practices:\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for malloc and free\n\nint main() {\n    // Attempt to allocate memory\n    char* buffer = static_cast<char*>(malloc(100000));\n    \n    // Check if malloc was successful\n    if (buffer == nullptr) {\n        std::cerr << \"Memory allocation failed\" << std::endl;\n        return 1; // Exit with error code\n    }\n\n    // Use the allocated memory\n    // ...\n\n    // Free the allocated memory\n    free(buffer);\n\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code example, the following standard libraries are required:\n\n- `<iostream>`: For input and output operations.\n- `<cstdlib>`: For `malloc` and `free` functions.\n\n### Relevant Resources\n\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n\n### Common Weakness Enumeration\n\n- [CWE-401: Improper Release of Memory Before Removing Last Reference ('Memory Leak')](https://cwe.mitre.org/data/definitions/401.html)\n- [CWE-476: NULL Pointer Dereference](https://cwe.mitre.org/data/definitions/476.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS161085"
+                ]
+              }
+            },
+            {
+              "id": "glog-c7255788-3972-4705-b258-9f4a82d08e2d",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detected Issue with C Function (malloc)\" vulnerability in C++ typically arises from improper use of the `malloc` function, which is used to allocate memory dynamically. This vulnerability can lead to several issues, such as memory leaks, buffer overflows, or undefined behavior if the allocated memory is not managed correctly. Specifically, using `malloc(dictSize)` without proper checks can result in insufficient memory allocation, leading to potential security risks.\n\n### General Mitigation Advice\n\n1. **Input Validation**: Ensure that the size passed to `malloc` is validated and within expected bounds.\n2. **Error Checking**: Always check the return value of `malloc` to ensure that memory allocation was successful.\n3. **Use Safer Alternatives**: Consider using C++ memory management features like `new` and `delete`, or smart pointers such as `std::unique_ptr` or `std::shared_ptr`.\n4. **Free Allocated Memory**: Ensure that all dynamically allocated memory is properly freed to prevent memory leaks.\n\n### Source Code Fix Recommendation\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for malloc and free\n\nint main() {\n    size_t dictSize = 1024; // Example size, should be validated\n    if (dictSize <= 0) {\n        std::cerr << \"Invalid dictionary size.\" << std::endl;\n        return 1;\n    }\n\n    // Allocate memory\n    char* dict = static_cast<char*>(malloc(dictSize));\n    if (dict == nullptr) {\n        std::cerr << \"Memory allocation failed.\" << std::endl;\n        return 1;\n    }\n\n    // Use the allocated memory\n    // ...\n\n    // Free the allocated memory\n    free(dict);\n\n    return 0;\n}\n```\n\n### Library Dependencies\n\n- `<iostream>`: For input and output operations.\n- `<cstdlib>`: For `malloc` and `free` functions.\n\n### OWASP Resources\n\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-401: Improper Release of Memory Before Removing Last Reference ('Memory Leak')](https://cwe.mitre.org/data/definitions/401.html)\n- [CWE-787: Out-of-bounds Write](https://cwe.mitre.org/data/definitions/787.html)\n\nThese links have been verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS161085"
+                ]
+              }
+            },
+            {
+              "id": "glog-0ade6d25-b804-4be6-b8f7-5eed136848c9",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability identified with the use of the `memcpy` function in C++ arises from the potential for buffer overflow, which occurs when the source size (`srcSize`) exceeds the size of the destination buffer (`dict`). This can lead to undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Bounds Checking**: Always ensure that the destination buffer is large enough to accommodate the data being copied.\n2. **Use Safer Alternatives**: Consider using safer functions like `memmove` or `std::copy` that provide better safety guarantees.\n3. **Static Analysis Tools**: Utilize static analysis tools to detect potential buffer overflows.\n4. **Code Reviews**: Regularly conduct code reviews to catch potential vulnerabilities early.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability, ensure that the destination buffer is adequately sized before performing the copy operation. Here is a fixed version of the code:\n\n```cpp\n#include <cstring> // For memcpy\n#include <algorithm> // For std::min\n\n// Assuming dict and test_buf are properly defined and initialized\nsize_t dictSize = /* size of dict */;\nsize_t srcSize = /* size of source data */;\n\n// Ensure that we do not copy more than the destination can hold\nsize_t copySize = std::min(dictSize, srcSize);\nmemcpy(dict, test_buf.getOrigData(), copySize);\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following libraries are required:\n\n- `<cstring>`: Provides the `memcpy` function.\n- `<algorithm>`: Provides the `std::min` function.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-ca0f9b17-4f5f-477a-9d72-c7ba3da8e49e",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability identified with the use of the `memcpy` function in C++ arises from the potential for buffer overflow, which occurs when the source size (`srcSize`) exceeds the size of the destination buffer (`dict`). This can lead to undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Bounds Checking**: Always ensure that the destination buffer is large enough to accommodate the data being copied.\n2. **Use Safer Alternatives**: Consider using safer functions like `memmove` or `std::copy` that provide better safety guarantees.\n3. **Static Analysis Tools**: Utilize static analysis tools to detect potential buffer overflows.\n4. **Code Reviews**: Regularly conduct code reviews to catch potential vulnerabilities early.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability, ensure that the destination buffer is adequately sized before performing the copy operation. Here is a fixed version of the code:\n\n```cpp\n#include <cstring> // For memcpy\n#include <algorithm> // For std::min\n\n// Assuming dict and test_buf are properly defined and initialized\nsize_t dictSize = /* size of dict */;\nsize_t srcSize = /* size of source data */;\n\n// Ensure that we do not copy more than the destination can hold\nsize_t copySize = std::min(dictSize, srcSize);\nmemcpy(dict, test_buf.getOrigData(), copySize);\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following libraries are required:\n\n- `<cstring>`: Provides the `memcpy` function.\n- `<algorithm>`: Provides the `std::min` function.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-6a73f2fe-d1be-4cf6-bfc7-fde742ad4e37",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability associated with the use of the `memcpy` function in C++ arises from the potential for buffer overflows. The function `memcpy(dict, test_buf.getOrigData(), 100)` copies 100 bytes from the source buffer `test_buf.getOrigData()` to the destination buffer `dict`. If the destination buffer `dict` is not large enough to hold 100 bytes, this operation can lead to a buffer overflow, which may result in undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Buffer Size Validation**: Always ensure that the destination buffer is large enough to accommodate the data being copied. Validate the size of both the source and destination buffers before performing the copy operation.\n\n2. **Use Safer Alternatives**: Consider using safer alternatives like `std::copy` or `std::memmove` which provide better safety guarantees and are part of the C++ Standard Library.\n\n3. **Bounds Checking**: Implement bounds checking to ensure that the size of the data being copied does not exceed the size of the destination buffer.\n\n4. **Static Analysis Tools**: Use static analysis tools to detect potential buffer overflows and other vulnerabilities in the code.\n\n### Source Code Fix Recommendation\n\nTo fix the specific vulnerability, ensure that the destination buffer `dict` is large enough to hold the data being copied. Here is a revised version of the code with proper size checks:\n\n```cpp\n#include <cstring> // For memcpy\n#include <algorithm> // For std::min\n\n// Assuming dict and test_buf are properly defined and initialized\nchar dict[100]; // Ensure dict is large enough\nconst char* source = test_buf.getOrigData();\nsize_t sourceSize = 100; // Size of data to copy\n\n// Ensure we do not copy more than the size of the destination buffer\nsize_t copySize = std::min(sourceSize, sizeof(dict));\nmemcpy(dict, source, copySize);\n```\n\n### Library Dependencies\n\nThe code example requires the following standard C++ libraries:\n\n- `<cstring>`: For the `memcpy` function.\n- `<algorithm>`: For the `std::min` function.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-369cec24-4afd-40a8-8496-1aeb8be9fc9a",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability in question involves the use of the `memcpy` function in C++. The `memcpy` function is used to copy a block of memory from one location to another. The specific issue arises when the size of the data being copied is not properly validated, which can lead to buffer overflows. This can result in undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Input Validation**: Always validate the size of the data being copied to ensure it does not exceed the size of the destination buffer.\n2. **Use Safer Alternatives**: Consider using safer alternatives like `memmove` or `std::copy` which provide additional safety checks.\n3. **Bounds Checking**: Implement bounds checking to ensure that the source and destination buffers are appropriately sized.\n4. **Static Analysis Tools**: Use static analysis tools to detect potential buffer overflows and other vulnerabilities in your code.\n\n### Source Code Fix Recommendation\n\n```cpp\n#include <cstring> // Required for memcpy\n#include <algorithm> // Required for std::min\n\n// Assuming SizeOf_LZ4HC_CCtx_internal() returns the size of the source buffer\nsize_t sourceSize = SizeOf_LZ4HC_CCtx_internal();\nsize_t destinationSize = /* size of destination buffer */;\n\n// Ensure the destination buffer is large enough\nif (destinationSize >= sourceSize) {\n    memcpy(d, statePtr.Get_Stream(), sourceSize);\n} else {\n    // Handle error: destination buffer is too small\n    // Consider logging an error or throwing an exception\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following library dependencies are required:\n\n- `<cstring>`: For the `memcpy` function.\n- `<algorithm>`: For the `std::min` function, if used for additional safety checks.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-44b25fea-dcdf-47a4-b674-bb01c441e22b",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability in question involves the use of the `memcpy` function in C++. The `memcpy` function is used to copy a block of memory from one location to another. The specific issue arises when the size of the data being copied is not properly validated, which can lead to buffer overflows. This can result in undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Input Validation**: Always validate the size of the data being copied to ensure it does not exceed the size of the destination buffer.\n2. **Use Safer Alternatives**: Consider using safer alternatives like `memmove` or `std::copy` which provide additional safety checks.\n3. **Bounds Checking**: Implement bounds checking to ensure that the source and destination buffers are appropriately sized.\n4. **Static Analysis Tools**: Use static analysis tools to detect potential buffer overflows and other vulnerabilities in your code.\n\n### Source Code Fix Recommendation\n\n```cpp\n#include <cstring> // Required for memcpy\n#include <algorithm> // Required for std::min\n\n// Assuming SizeOf_LZ4HC_CCtx_internal() returns the size of the source buffer\nsize_t sourceSize = SizeOf_LZ4HC_CCtx_internal();\nsize_t destinationSize = /* size of destination buffer */;\n\n// Ensure the destination buffer is large enough\nif (destinationSize >= sourceSize) {\n    memcpy(d, statePtr.Get_Stream(), sourceSize);\n} else {\n    // Handle error: destination buffer is too small\n    // Consider logging an error or throwing an exception\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following library dependencies are required:\n\n- `<cstring>`: For the `memcpy` function.\n- `<algorithm>`: For the `std::min` function, if used for additional safety checks.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-f3ecd62a-6449-4e39-8a17-a27ed9fe8e3b",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability in question involves the use of the `memcpy` function in C++. The `memcpy` function is used to copy a block of memory from one location to another. The specific issue arises when the size of the data being copied is not properly validated, which can lead to buffer overflows. This can result in undefined behavior, including data corruption, crashes, or security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Input Validation**: Always validate the size of the data being copied to ensure it does not exceed the size of the destination buffer.\n2. **Use Safer Alternatives**: Consider using safer alternatives like `memmove` or `std::copy` which provide additional safety checks.\n3. **Bounds Checking**: Implement bounds checking to ensure that the source and destination buffers are appropriately sized.\n4. **Static Analysis Tools**: Use static analysis tools to detect potential buffer overflows and other vulnerabilities in your code.\n\n### Source Code Fix Recommendation\n\n```cpp\n#include <cstring> // Required for memcpy\n#include <algorithm> // Required for std::min\n\n// Assuming SizeOf_LZ4HC_CCtx_internal() returns the size of the source buffer\nsize_t sourceSize = SizeOf_LZ4HC_CCtx_internal();\nsize_t destinationSize = /* size of destination buffer */;\n\n// Ensure the destination buffer is large enough\nif (destinationSize >= sourceSize) {\n    memcpy(d, statePtr.Get_Stream(), sourceSize);\n} else {\n    // Handle error: destination buffer is too small\n    // Consider logging an error or throwing an exception\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following library dependencies are required:\n\n- `<cstring>`: For the `memcpy` function.\n- `<algorithm>`: For the `std::min` function, if used for additional safety checks.\n\n### Relevant Resources\n\n- [OWASP Buffer Overflow](https://owasp.org/www-community/vulnerabilities/Buffer_Overflow)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-793c75fd-54fc-4741-a896-1a6f51eba9a9",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe vulnerability in question arises from the use of the `memcpy` function in C++, which can lead to buffer overflow if not properly managed. The specific line of code:\n\n```cpp\nmemcpy(&dict[dictSize], test_buf.getOrigData(), srcSize);\n```\n\nis vulnerable because it does not ensure that the destination buffer `dict` has enough space to accommodate `srcSize` bytes of data. If `srcSize` exceeds the available space in `dict`, this can lead to memory corruption, crashes, or potential security vulnerabilities such as arbitrary code execution.\n\n### General Mitigation Advice\n\n1. **Bounds Checking**: Always ensure that the destination buffer is large enough to hold the data being copied.\n2. **Use Safer Alternatives**: Consider using safer functions like `std::copy` or `std::memmove` which provide better safety guarantees.\n3. **Input Validation**: Validate the size of the data being copied to ensure it does not exceed the buffer size.\n4. **Static Analysis Tools**: Use static analysis tools to detect potential buffer overflows in your code.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability, ensure that the destination buffer has enough space before performing the copy operation. Here is a revised version of the code:\n\n```cpp\n#include <algorithm> // for std::min\n#include <cstring>   // for std::memcpy\n\n// Assuming dict is a vector or array and dictCapacity is the total capacity of dict\nif (dictSize + srcSize <= dictCapacity) {\n    std::memcpy(&dict[dictSize], test_buf.getOrigData(), srcSize);\n} else {\n    // Handle error: insufficient space in destination buffer\n    // This could be logging an error, resizing the buffer, etc.\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following standard libraries are required:\n\n- `<algorithm>`: For `std::min` function.\n- `<cstring>`: For `std::memcpy` function.\n\n### OWASP Resources\n\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-53636810-592d-479e-915f-b2560aa99c2d",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (strlen)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2740,
+                  "startColumn": 39,
+                  "endLine": 2740,
+                  "endColumn": 50,
+                  "charOffset": 106198,
+                  "charLength": 11,
+                  "snippet": {
+                    "text": "strlen(str)",
+                    "rendered": {
+                      "text": "strlen(str)",
+                      "markdown": "`strlen(str)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 106198,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strlen_s(str, <size of str>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 106198,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strnlen(str, <size of str>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-dfd99517-3bd8-4385-817b-f2052e9c3ee1",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Do not store tokens or keys in source code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2661,
+                  "startColumn": 22,
+                  "endLine": 2661,
+                  "endColumn": 60,
+                  "charOffset": 102764,
+                  "charLength": 38,
+                  "snippet": {
+                    "text": "\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+                    "rendered": {
+                      "text": "\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+                      "markdown": "`\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "Medium",
+            "tags": [
+              "Implementation.Privacy.Token"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-fa270dd7-d7b9-44f8-8f22-417245b59518",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (strlen)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2710,
+                  "startColumn": 39,
+                  "endLine": 2710,
+                  "endColumn": 50,
+                  "charOffset": 104765,
+                  "charLength": 11,
+                  "snippet": {
+                    "text": "strlen(str)",
+                    "rendered": {
+                      "text": "strlen(str)",
+                      "markdown": "`strlen(str)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 104765,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strlen_s(str, <size of str>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 104765,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strnlen(str, <size of str>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-f31b3a6c-0f3b-4801-94fe-bb409bdfc749",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (strlen)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2634,
+                  "startColumn": 39,
+                  "endLine": 2634,
+                  "endColumn": 50,
+                  "charOffset": 101659,
+                  "charLength": 11,
+                  "snippet": {
+                    "text": "strlen(str)",
+                    "rendered": {
+                      "text": "strlen(str)",
+                      "markdown": "`strlen(str)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 101659,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strlen_s(str, <size of str>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 101659,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strnlen(str, <size of str>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-0df4d402-e87d-4474-ad87-bae8ada11ca8",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2270,
+                  "startColumn": 8,
+                  "endLine": 2270,
+                  "endColumn": 28,
+                  "charOffset": 89338,
+                  "charLength": 20,
+                  "snippet": {
+                    "text": "memcpy(match, c, sz)",
+                    "rendered": {
+                      "text": "memcpy(match, c, sz)",
+                      "markdown": "`memcpy(match, c, sz)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 89338,
+                        "charLength": 20
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(match, <size of match>,  c,  sz)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-1b59b8e9-908f-4639-a581-cf3d2c2a5e6d",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (malloc)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2269,
+                  "startColumn": 28,
+                  "endLine": 2269,
+                  "endColumn": 38,
+                  "charOffset": 89318,
+                  "charLength": 10,
+                  "snippet": {
+                    "text": "malloc(sz)",
+                    "rendered": {
+                      "text": "malloc(sz)",
+                      "markdown": "`malloc(sz)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If the value provided to malloc is the result of unsafe integer math, it can result in an exploitable condition. "
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 89318,
+                        "charLength": 10
+                      },
+                      "insertedContent": {
+                        "text": "calloc(<number of elements>, <size of each element>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-b4cb1445-8143-4b8e-aba0-a87eb1b4c99e",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2260,
+                  "startColumn": 8,
+                  "endLine": 2260,
+                  "endColumn": 25,
+                  "charOffset": 89083,
+                  "charLength": 17,
+                  "snippet": {
+                    "text": "memcpy(ip, c, sz)",
+                    "rendered": {
+                      "text": "memcpy(ip, c, sz)",
+                      "markdown": "`memcpy(ip, c, sz)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 89083,
+                        "charLength": 17
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(ip, <size of ip>,  c,  sz)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-dc49edc2-ab46-46aa-acb4-d01467ab2bf5",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (malloc)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2259,
+                  "startColumn": 25,
+                  "endLine": 2259,
+                  "endColumn": 35,
+                  "charOffset": 89063,
+                  "charLength": 10,
+                  "snippet": {
+                    "text": "malloc(sz)",
+                    "rendered": {
+                      "text": "malloc(sz)",
+                      "markdown": "`malloc(sz)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If the value provided to malloc is the result of unsafe integer math, it can result in an exploitable condition. "
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 89063,
+                        "charLength": 10
+                      },
+                      "insertedContent": {
+                        "text": "calloc(<number of elements>, <size of each element>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-6b40440b-7203-4697-8d3d-ee0e48265042",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (malloc)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2207,
+                  "startColumn": 25,
+                  "endLine": 2207,
+                  "endColumn": 39,
+                  "charOffset": 87733,
+                  "charLength": 14,
+                  "snippet": {
+                    "text": "malloc(100000)",
+                    "rendered": {
+                      "text": "malloc(100000)",
+                      "markdown": "`malloc(100000)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If the value provided to malloc is the result of unsafe integer math, it can result in an exploitable condition. "
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 87733,
+                        "charLength": 14
+                      },
+                      "insertedContent": {
+                        "text": "calloc(<number of elements>, <size of each element>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-75fc17e9-740f-4b9d-abe4-060b2206d99f",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (malloc)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2171,
+                  "startColumn": 25,
+                  "endLine": 2171,
+                  "endColumn": 39,
+                  "charOffset": 86689,
+                  "charLength": 14,
+                  "snippet": {
+                    "text": "malloc(100000)",
+                    "rendered": {
+                      "text": "malloc(100000)",
+                      "markdown": "`malloc(100000)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If the value provided to malloc is the result of unsafe integer math, it can result in an exploitable condition. "
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 86689,
+                        "charLength": 14
+                      },
+                      "insertedContent": {
+                        "text": "calloc(<number of elements>, <size of each element>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-c7255788-3972-4705-b258-9f4a82d08e2d",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (malloc)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2128,
+                  "startColumn": 23,
+                  "endLine": 2128,
+                  "endColumn": 39,
+                  "charOffset": 85672,
+                  "charLength": 16,
+                  "snippet": {
+                    "text": "malloc(dictSize)",
+                    "rendered": {
+                      "text": "malloc(dictSize)",
+                      "markdown": "`malloc(dictSize)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If the value provided to malloc is the result of unsafe integer math, it can result in an exploitable condition. "
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 85672,
+                        "charLength": 16
+                      },
+                      "insertedContent": {
+                        "text": "calloc(<number of elements>, <size of each element>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-0ade6d25-b804-4be6-b8f7-5eed136848c9",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2077,
+                  "startColumn": 4,
+                  "endLine": 2077,
+                  "endColumn": 49,
+                  "charOffset": 84110,
+                  "charLength": 45,
+                  "snippet": {
+                    "text": "memcpy(dict, test_buf.getOrigData(), srcSize)",
+                    "rendered": {
+                      "text": "memcpy(dict, test_buf.getOrigData(), srcSize)",
+                      "markdown": "`memcpy(dict, test_buf.getOrigData(), srcSize)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 84110,
+                        "charLength": 45
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(dict, <size of dict>,  test_buf.getOrigData(),  srcSize)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-ca0f9b17-4f5f-477a-9d72-c7ba3da8e49e",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2050,
+                  "startColumn": 4,
+                  "endLine": 2050,
+                  "endColumn": 49,
+                  "charOffset": 82998,
+                  "charLength": 45,
+                  "snippet": {
+                    "text": "memcpy(dict, test_buf.getOrigData(), srcSize)",
+                    "rendered": {
+                      "text": "memcpy(dict, test_buf.getOrigData(), srcSize)",
+                      "markdown": "`memcpy(dict, test_buf.getOrigData(), srcSize)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 82998,
+                        "charLength": 45
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(dict, <size of dict>,  test_buf.getOrigData(),  srcSize)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-6a73f2fe-d1be-4cf6-bfc7-fde742ad4e37",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2028,
+                  "startColumn": 4,
+                  "endLine": 2028,
+                  "endColumn": 45,
+                  "charOffset": 82160,
+                  "charLength": 41,
+                  "snippet": {
+                    "text": "memcpy(dict, test_buf.getOrigData(), 100)",
+                    "rendered": {
+                      "text": "memcpy(dict, test_buf.getOrigData(), 100)",
+                      "markdown": "`memcpy(dict, test_buf.getOrigData(), 100)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 82160,
+                        "charLength": 41
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(dict, <size of dict>,  test_buf.getOrigData(),  100)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-369cec24-4afd-40a8-8496-1aeb8be9fc9a",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 2009,
+                  "startColumn": 4,
+                  "endLine": 2009,
+                  "endColumn": 65,
+                  "charOffset": 81406,
+                  "charLength": 61,
+                  "snippet": {
+                    "text": "memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()",
+                    "rendered": {
+                      "text": "memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()",
+                      "markdown": "`memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 81406,
+                        "charLength": 61
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(d, <size of d>,  statePtr.Get_Stream(),  SizeOf_LZ4HC_CCtx_internal()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-44b25fea-dcdf-47a4-b674-bb01c441e22b",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 1983,
+                  "startColumn": 4,
+                  "endLine": 1983,
+                  "endColumn": 65,
+                  "charOffset": 80357,
+                  "charLength": 61,
+                  "snippet": {
+                    "text": "memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()",
+                    "rendered": {
+                      "text": "memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()",
+                      "markdown": "`memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 80357,
+                        "charLength": 61
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(d, <size of d>,  statePtr.Get_Stream(),  SizeOf_LZ4HC_CCtx_internal()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-f3ecd62a-6449-4e39-8a17-a27ed9fe8e3b",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 1914,
+                  "startColumn": 4,
+                  "endLine": 1914,
+                  "endColumn": 65,
+                  "charOffset": 77527,
+                  "charLength": 61,
+                  "snippet": {
+                    "text": "memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()",
+                    "rendered": {
+                      "text": "memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()",
+                      "markdown": "`memcpy(d, statePtr.Get_Stream(), SizeOf_LZ4HC_CCtx_internal()`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 77527,
+                        "charLength": 61
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(d, <size of d>,  statePtr.Get_Stream(),  SizeOf_LZ4HC_CCtx_internal()"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-793c75fd-54fc-4741-a896-1a6f51eba9a9",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Problematic C function detected (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                },
+                "region": {
+                  "startLine": 1910,
+                  "startColumn": 4,
+                  "endLine": 1910,
+                  "endColumn": 58,
+                  "charOffset": 77303,
+                  "charLength": 54,
+                  "snippet": {
+                    "text": "memcpy(&dict[dictSize],test_buf.getOrigData(),srcSize)",
+                    "rendered": {
+                      "text": "memcpy(&dict[dictSize],test_buf.getOrigData(),srcSize)",
+                      "markdown": "`memcpy(&dict[dictSize],test_buf.getOrigData(),srcSize)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "gtest/lz4hc/lz4hc_gtest.cpp"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 77303,
+                        "charLength": 54
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(&dict[dictSize], <size of &dict[dictSize]>, test_buf.getOrigData(), srcSize)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
